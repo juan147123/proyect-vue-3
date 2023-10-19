@@ -32,7 +32,6 @@
                     <div class="row mb-5">
                         <img
                             src="/images/logo2.png"
-                            alt="grupo_flesan"
                             class="logo"
                         />
                     </div>
