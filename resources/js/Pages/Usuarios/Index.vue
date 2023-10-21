@@ -56,6 +56,7 @@
                             data-bs-dismiss="modal"
                             aria-label="Close"
                             id="btn-close-modal-user"
+                            @click="clearform"
                         ></button>
                     </div>
                     <div class="modal-body">
@@ -114,6 +115,7 @@
                                     type="button"
                                     class="btn btn-danger"
                                     data-bs-dismiss="modal"
+                                    @click="clearform"
                                 >
                                     Cancelar
                                 </button>
@@ -304,11 +306,19 @@ export default {
             });
         },
         onSubmitEvent(typeSwal) {
+            this.clearform();
             this.enabledSubmitAnimations(false, "");
             this.table.ajax.reload();
             $("#btn-close-modal-user").trigger("click");
             setSwal(typeSwal);
-        }
+        },
+        clearform() {
+            this.form.id = 0;
+            this.form.name = "";
+            this.form.email = "";
+            this.form.id_rol = "";
+            this.form.password = "";
+        },
     },
 };
 </script>
