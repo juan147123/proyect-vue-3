@@ -2,7 +2,6 @@
     <Spinner v-if="isLoading == true"></Spinner>
     <Sidebar
         @menu-click="handleMenuClick"
-        @tiempo-click="registrarTiempoDeUso"
     />
     <Navbar @menu-click="handleMenuClick" />
     <main>

@@ -48,4 +48,36 @@ class UserController extends Controller
     {
         return Inertia::render('Usuarios/Index');
     }
+    public function getAll()
+    {
+        return $this->repository->list();
+    }
+    public function create(Request $request)
+    {
+        $data = $this->dtoUserHash($request);
+        return $this->repository->create($data);
+    }
+
+    public function update(Request $request)
+    {
+        $data = $this->dtoUserHash($request);
+        return $this->repository->update($request->id, $data);
+    }
+
+    public function delete(Request $request)
+    {
+        return $this->repository->update($request->id, ["enable" => 0]);
+    }
+
+    public function dtoUserHash($request)
+    {
+        $data = null;
+        if (isset($request['password'])) {
+            $request['password'] =  Hash::make($request['password']);
+            $data =  $request->all();
+        } else {
+            $data = $request->except('password');
+        }
+        return $data;
+    }
 }

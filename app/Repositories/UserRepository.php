@@ -27,4 +27,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return $this->model->where("email", $email)->first();
     }
+    public function list()
+    {
+        return $this->model
+            ->where("enable", 1)
+            ->orderBy("id", "desc")
+            ->get();
+    }
 }

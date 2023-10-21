@@ -35,5 +35,12 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    //USUARIOS
     Route::get('usuarios', [UserController::class, 'getPageUsers'])->name('usuarios');
+    Route::get('usuarios/list', [UserController::class, 'getAll'])->name('usuarios.list');
+    Route::post('usuarios/create', [UserController::class, 'create'])->name('usuarios.create');
+    Route::put('usuarios/update', [UserController::class, 'update'])->name('usuarios.update');
+    Route::put('usuarios/delete/{id}', [UserController::class, 'delete'])->name('usuarios.delete');
+
+
 });

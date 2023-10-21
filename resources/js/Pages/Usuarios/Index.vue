@@ -35,6 +35,97 @@
                 </div>
             </div>
         </div>
+        <!-- Modal -->
+        <div
+            class="modal fade"
+            id="modalUsers"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="tituloUsuarios"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tituloUsuarios">
+                            {{ form.id == 0 ? "Registrar" : "Editar" }}
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            id="btn-close-modal-user"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form @submit.prevent="submit">
+                            <div class="mb-3 mx-3">
+                                <label for="" class="form-label">Perfil:</label>
+                                <select
+                                    class="form-select form-select-lg"
+                                    v-model="form.id_rol"
+                                    required
+                                >
+                                    <option value="" selected>
+                                        Seleccione
+                                    </option>
+                                    <option value="1">Administrador</option>
+                                </select>
+                            </div>
+                            <div class="mb-3 mx-3">
+                                <label for="" class="form-label"
+                                    >Nombres y Apellidos:</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    v-model="form.name"
+                                    placeholder="Ingrese su nombre y apellidos"
+                                    required
+                                />
+                            </div>
+                            <div class="mb-3 mx-3">
+                                <label for="" class="form-label"
+                                    >Correo electrrónico:</label
+                                >
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    v-model="form.email"
+                                    placeholder="Ingrese su correo electrónico"
+                                    required
+                                />
+                            </div>
+                            <div class="mb-3 mx-3">
+                                <label for="" class="form-label"
+                                    >Contraseña:</label
+                                >
+                                <input
+                                    type="password"
+                                    class="form-control"
+                                    v-model="form.password"
+                                    :required="form.id == 0"
+                                />
+                            </div>
+
+                            <div class="modal-footer">
+                                <button
+                                    type="button"
+                                    class="btn btn-danger"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Cancelar
+                                </button>
+                                <button type="Submit" class="btn btn-primary">
+                                    {{ form.id == 0 ? "Registrar" : "Editar" }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </AppLayout>
 </template>
 <script>
@@ -43,6 +134,7 @@ import Breadcrumbs from "@/Layouts/Breadcrumbs.vue";
 import Spinner from "@/Layouts/Preloader.vue";
 
 import { setSwal } from "../../../Utils/swal";
+import * as mensajes from "../../../Utils/message";
 
 export default {
     components: {
@@ -62,18 +154,17 @@ export default {
             isLoading: false,
             mensaje: false,
             table: "",
-            formData: this.$inertia.form({
-                id_aplicacion_usuario: 0,
+            form: this.$inertia.form({
+                id: 0,
                 name: "",
-                username: "",
+                email: "",
                 id_rol: "",
-                objeto_permitido: "",
-                id_usuario_rol: "",
+                password: "",
             }),
         };
     },
     mounted() {
-        /*   this.createTable(); */
+        this.createTable();
     },
     methods: {
         createTable() {
@@ -83,7 +174,7 @@ export default {
                     url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json",
                 },
                 ajax: {
-                    url: "/usuarios/" + localStorage.getItem("centro_gestion"),
+                    url: "/usuarios/list/",
                     dataSrc: "",
                 },
                 responsive: true,
@@ -103,7 +194,7 @@ export default {
                     $(row)
                         .find(".delete-btn")
                         .on("click", function () {
-                            self.deleteUser(data.id_aplicacion_usuario);
+                            self.delete(data.id);
                         });
                 },
                 ordering: false,
@@ -118,8 +209,19 @@ export default {
                 ],
                 columns: [
                     { data: "name" },
-                    { data: "username" },
-                    { data: "perfil" },
+                    {
+                        data: "email",
+                    },
+                    {
+                        data: "id_rol",
+                        render: function (data, type, row) {
+                            var rol = "";
+                            if (data == 1) {
+                                rol = "Administrador";
+                            }
+                            return `<span>${rol}</span>`;
+                        },
+                    },
                     {
                         data: null,
                         width: "100px",
@@ -139,29 +241,24 @@ export default {
             });
         },
         showUser(user) {
-            this.formData = this.$inertia.form(user);
+            this.form = this.$inertia.form(user);
         },
         enabledSubmitAnimations(status, mensaje) {
             this.isLoading = status;
             this.mensaje = mensaje;
         },
         submit() {
-            if (this.formData.id_aplicacion_usuario == 0) {
+            if (this.form.id == 0) {
                 this.create();
             } else {
                 this.update();
             }
         },
-        onSubmitEvent(typeSwal) {
-            this.enabledSubmitAnimations(false, "");
-            this.table.ajax.reload();
-            $("#btn-close-modal-user").trigger("click");
-            setSwal(typeSwal);
-        },
+
         async create() {
             this.enabledSubmitAnimations(true, "registrando...");
             await axios
-                .post(`/usuarios/aplicacion/create`, this.formData)
+                .post(`usuarios/create`, this.form)
                 .then(async (response) => {
                     if (response.status == 200) {
                         this.onSubmitEvent(1);
@@ -173,10 +270,7 @@ export default {
         async update() {
             this.enabledSubmitAnimations(true, "actualizando...");
             await axios
-                .put(
-                    `/usuarios/aplicacion/udpate/${this.formData.id_aplicacion_usuario}`,
-                    this.formData
-                )
+                .put(`usuarios/update`, this.form)
                 .then(async (response) => {
                     if (response.status == 200) {
                         this.onSubmitEvent(2);
@@ -185,6 +279,36 @@ export default {
                     }
                 });
         },
+        delete(id) {
+            self = this;
+            Swal.fire({
+                title: mensajes.MENSAJE_SEGURO,
+                text: mensajes.MENSAJE_ELIMINAR,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Sí, eliminar",
+                cancelButtonText: "Cancelar",
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    this.enabledSubmitAnimations(true, "eliminado...");
+                    axios
+                        .put(`usuarios/delete/${id}`)
+                        .then(async (response) => {
+                            if (response.status == 200) {
+                                this.onSubmitEvent(3);
+                            } else {
+                                console.log("error");
+                            }
+                        });
+                }
+            });
+        },
+        onSubmitEvent(typeSwal) {
+            this.enabledSubmitAnimations(false, "");
+            this.table.ajax.reload();
+            $("#btn-close-modal-user").trigger("click");
+            setSwal(typeSwal);
+        }
     },
 };
 </script>

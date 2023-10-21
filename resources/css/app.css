@@ -385,3 +385,37 @@ div.dataTables_wrapper div.dataTables_paginate li a {
 .modal-footer button {
     font-size: 12px;
 }
+
+/* sweet alert */
+.swal2-styled.swal2-confirm {
+    background-color: green !important;
+    border-color: green !important;
+}
+
+.swal2-styled.swal2-cancel {
+    background-color: red !important;
+    border-color: red !important;
+}
+.swal2-styled.swal2-deny {
+    background-color: rgb(17, 87, 179) !important;
+    border-color: red !important;
+}
+.swal2-icon.swal2-warning {
+    border-color: #009cff !important;
+    color: #009cff !important;
+}
+div:where(.swal2-container) .swal2-html-container {
+    font-size: 14px !important;
+}
+.swal2-styled.swal2-confirm {
+    font-size: 12px !important;
+}
+.swal2-styled.swal2-cancel {
+    font-size: 12px !important;
+}
+.swal2-icon {
+    font-size: 12px;
+}
+.swal2-title {
+    font-size: 17px;
+}
