@@ -38,6 +38,7 @@ export default {
             $(".main-content").toggleClass("active");
             $(".breadcrumbs").toggleClass("active");
             $(".main-content-dashboard").toggleClass("active");
+            $(".main-contact").toggleClass("active");
             $(".user-img").toggleClass("active");
             $(".nav").toggleClass("active");
         });

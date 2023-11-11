@@ -15,23 +15,29 @@
                         Nuevo
                     </button>
                 </div>
-                <div class="col-12 my-2">
-                    <table
-                        id="tableUsers"
-                        class="table table-bordered dt-responsive"
-                    >
-                        <thead class="active">
-                            <tr>
-                                <th>Nombres y apellidos</th>
+                <div class="box">
+                    <div class="container-fluid">
+                        <div class="box-body">
+                            <div class="table-responsive">
+                                <table
+                                    id="tableUsers"
+                                    class="table table-bordered dt-responsive"
+                                >
+                                    <thead class="active">
+                                        <tr>
+                                            <th>Nombres y apellidos</th>
 
-                                <th>Correo electrónico</th>
-                                <th>Perfil</th>
+                                            <th>Correo electrónico</th>
+                                            <th>Perfil</th>
 
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

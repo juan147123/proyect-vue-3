@@ -30,6 +30,16 @@
                             <span class="text">Usuarios</span>
                         </a>
                     </li>
+                    <li :class="{ active: route().current('proveedores') }">
+                        <a
+                            @click="handleMenuClick"
+                            :href="route('proveedores')"
+                            :active="route().current('proveedores')"
+                        >
+                            <i class="ph ph-bold ph-users"></i>
+                            <span class="text">Proveedores</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

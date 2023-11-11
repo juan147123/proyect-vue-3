@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\{
+    SupplierContactController,
+    UserController,
+    SupplierController
+};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -41,6 +45,19 @@ Route::middleware([
     Route::post('usuarios/create', [UserController::class, 'create'])->name('usuarios.create');
     Route::put('usuarios/update', [UserController::class, 'update'])->name('usuarios.update');
     Route::put('usuarios/delete/{id}', [UserController::class, 'delete'])->name('usuarios.delete');
+
+    //PROVEEDORES
+    Route::get('proveedores', [SupplierController::class, 'redirectPageSuppliers'])->name('proveedores');
+    Route::get('proveedores/list', [SupplierController::class, 'listAll'])->name('proveedores.list');
+    Route::post('proveedores/create', [SupplierController::class, 'create'])->name('proveedores.create');
+    Route::put('proveedores/update/{id}', [SupplierController::class, 'update'])->name('proveedores.update');
+    Route::put('proveedores/delete/{id}', [SupplierController::class, 'delete'])->name('proveedores.delete');
+    //CONTACTOS PROVEEDOR
+    Route::get('proveedores/contact/list', [SupplierContactController::class, 'listAll'])->name('proveedores.contact.list');
+    Route::get('proveedores/contact/list/all/{id}', [SupplierContactController::class, 'getAllBySuppId'])->name('proveedores.contact.list');
+    Route::post('proveedores/contact/create', [SupplierContactController::class, 'create'])->name('proveedores.contact.create');
+    Route::put('proveedores/contact/update/{id}', [SupplierContactController::class, 'update'])->name('proveedores.contact.update');
+    Route::put('proveedores/contact/delete/{id}', [SupplierContactController::class, 'delete'])->name('proveedores.contact.delete');
 
 
 });

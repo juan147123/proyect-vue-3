@@ -1,6 +1,6 @@
 <template>
     <Spinner v-if="isLoading == true"></Spinner>
-    <div class="breadcrumbs">
+    <div class="breadcrumbs text-dark">
         <a href="dashboard"  @click="handleMenuClick">
             <i class="icon ph-bold ph ph-gauge"></i> &nbsp;Panel</a
         >

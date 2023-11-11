@@ -8,7 +8,7 @@
     background-color: #ffffff;
 }
 body {
-    background-color: #06213bec !important;
+    background-color: #ffffffec !important;
 }
 .contenedor {
     width: 100%;
@@ -217,6 +217,7 @@ ul {
     gap: 10px;
     transition: all 0.3s;
     z-index: 999;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .sidebar.active {
@@ -234,6 +235,7 @@ ul {
     transition: all 0.3s;
     border-radius: 10px;
     height: 40px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .navbar.active {
@@ -243,13 +245,29 @@ ul {
 }
 .main-content {
     background-color: #fff;
-    position: absolute;
     margin-left: 215px;
     width: calc(100% - 228px);
     margin-top: 50px;
     border-radius: 10px;
     transition: all 0.3s;
     color: #f6f6f6;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.main-contact {
+    background-color: #fff;
+    margin-left: 215px;
+    width: calc(100% - 228px);
+    border-radius: 10px;
+    transition: all 0.3s;
+    color: #f6f6f6;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.main-contact.active {
+    transition: all 0.3s;
+    margin-left: 115px;
+    width: calc(100% - 125px);
 }
 
 .main-content.active {
@@ -285,17 +303,17 @@ ul {
     position: absolute;
     margin-left: 225px;
     width: calc(100% - 225px);
-    margin-top: 20px;
+    margin-top: -30px;
     border-radius: 10px;
     transition: all 0.3s;
-    color: #f6f6f6;
+    color: #000000 !important; 
     display: flex;
 }
 .breadcrumbs a {
     align-items: center;
     text-decoration: none;
     font-size: 14px;
-    color: #f6f6f6;
+    color: #000000;
     display: flex;
 }
 .breadcrumbs .separator {

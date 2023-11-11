@@ -5,11 +5,15 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Interfaces\{
     EloquentRepositoryInterface,
-    UserRepositoryInterface
+    UserRepositoryInterface,
+    SupplierRepositoryInterface,
+    SupplierContactRepositoryInterface
 };
 use App\Repositories\{
     BaseRepository,
-    UserRepository
+    UserRepository,
+    SupplierRepository,
+    SupplierContactRepository
 };
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -23,6 +27,8 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(EloquentRepositoryInterface::class, BaseRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(SupplierRepositoryInterface::class,  SupplierRepository::class);
+        $this->app->bind(SupplierContactRepositoryInterface::class,  SupplierContactRepository::class);
     }
 
     /**
