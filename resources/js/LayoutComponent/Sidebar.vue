@@ -4,8 +4,11 @@
             <i class="ph-bold ph-caret-left"></i>
         </div>
         <div class="d-flex flex-column align-items-center head">
-            <div class="user-img">
+            <div class="user-img" v-if="$page.props.auth.user.avatar">
                 <img :src="$page.props.auth.user.avatar" alt="" />
+            </div>
+            <div class="user-img" v-else>
+                <img :src="image" alt="" />
             </div>
         </div>
         <div class="user-details">
@@ -41,6 +44,44 @@
                         </a>
                     </li>
                 </ul>
+                <ul>
+                    <li>
+                        <a>
+                            <i class="ph-bold ph-gear-fine"></i>
+                            <span class="text">Configuraciones</span>
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                        <ul
+                            class="sub-menu"
+                            :class="{
+                                active: route('configuraciones.redirect', [
+                                    'categoria',
+                                ]),
+                            }"
+                        >
+                            <a
+                                @click="handleMenuClick"
+                                :href="
+                                    route('configuraciones.redirect', [
+                                        'categoria',
+                                    ])
+                                "
+                            >
+                                <span class="text">Categorias</span>
+                            </a>
+                            <a
+                                @click="handleMenuClick"
+                                :href="
+                                    route('configuraciones.redirect', [
+                                        'frutas',
+                                    ])
+                                "
+                            >
+                                <span class="text">Frutas</span>
+                            </a>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="menu">
@@ -57,10 +98,12 @@
     </div>
 </template>
 <script>
+var urlBase = window.location.origin;
 export default {
     data() {
         return {
             showingNavigationDropdown: false,
+            image: urlBase + "/images/default-user.jpg",
         };
     },
     mounted() {},

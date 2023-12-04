@@ -7,13 +7,15 @@ use App\Interfaces\{
     EloquentRepositoryInterface,
     UserRepositoryInterface,
     SupplierRepositoryInterface,
-    SupplierContactRepositoryInterface
+    SupplierContactRepositoryInterface,
+    TiposRepositoryInterface
 };
 use App\Repositories\{
     BaseRepository,
     UserRepository,
     SupplierRepository,
-    SupplierContactRepository
+    SupplierContactRepository,
+    TiposRepository
 };
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -29,6 +31,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(SupplierRepositoryInterface::class,  SupplierRepository::class);
         $this->app->bind(SupplierContactRepositoryInterface::class,  SupplierContactRepository::class);
+        $this->app->bind(TiposRepositoryInterface::class,  TiposRepository::class);
     }
 
     /**

@@ -3,7 +3,8 @@
 use App\Http\Controllers\{
     SupplierContactController,
     UserController,
-    SupplierController
+    SupplierController,
+    TiposController
 };
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -52,12 +53,20 @@ Route::middleware([
     Route::post('proveedores/create', [SupplierController::class, 'create'])->name('proveedores.create');
     Route::put('proveedores/update/{id}', [SupplierController::class, 'update'])->name('proveedores.update');
     Route::put('proveedores/delete/{id}', [SupplierController::class, 'delete'])->name('proveedores.delete');
+    
     //CONTACTOS PROVEEDOR
     Route::get('proveedores/contact/list', [SupplierContactController::class, 'listAll'])->name('proveedores.contact.list');
     Route::get('proveedores/contact/list/all/{id}', [SupplierContactController::class, 'getAllBySuppId'])->name('proveedores.contact.list');
     Route::post('proveedores/contact/create', [SupplierContactController::class, 'create'])->name('proveedores.contact.create');
     Route::put('proveedores/contact/update/{id}', [SupplierContactController::class, 'update'])->name('proveedores.contact.update');
     Route::put('proveedores/contact/delete/{id}', [SupplierContactController::class, 'delete'])->name('proveedores.contact.delete');
+    
+    //TIPOS
+    Route::get('configuraciones/{tipo}', [TiposController::class, 'redirectPageTipos'])->name('configuraciones.redirect');
+    Route::get('configuraciones/list/all/{id}', [TiposController::class, 'getAllBySuppId'])->name('configuraciones.list');
+    Route::post('configuraciones/create', [TiposController::class, 'create'])->name('configuraciones.create');
+    Route::put('configuraciones/update/{id}', [TiposController::class, 'update'])->name('configuraciones.update');
+    Route::put('configuraciones/delete/{id}', [TiposController::class, 'delete'])->name('configuraciones.delete');
 
 
 });

@@ -315,13 +315,6 @@ export default {
                 ],
             });
         },
-        SetContacts(data) {
-            this.showContacts();
-            this.idcontact = data.id;
-        },
-        showContacts() {
-            this.contactsView = !this.contactsView;
-        },
         reloadTable() {
             this.table.ajax.reload();
         },
@@ -395,6 +388,14 @@ export default {
         },
         show(data) {
             this.form = this.$inertia.form(data);
+        },
+
+        SetContacts(data) {
+            this.showContacts();
+            this.idcontact = data.id;
+        },
+        showContacts() {
+            this.contactsView = !this.contactsView;
         },
     },
 };

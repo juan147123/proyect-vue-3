@@ -8,7 +8,7 @@
     background-color: #ffffff;
 }
 body {
-    background-color: #ffffffec !important;
+    background-color: rgba(5, 54, 47, 0.925) !important;
 }
 .contenedor {
     width: 100%;
@@ -30,6 +30,7 @@ body {
     overflow: hidden;
     border-radius: 50%;
     transition: all 0.3s;
+    border: rgba(5, 54, 47, 0.925) 2px solid;
 }
 .user-img.active {
     width: 60px;
@@ -306,7 +307,6 @@ ul {
     margin-top: -30px;
     border-radius: 10px;
     transition: all 0.3s;
-    color: #000000 !important; 
     display: flex;
 }
 .breadcrumbs a {

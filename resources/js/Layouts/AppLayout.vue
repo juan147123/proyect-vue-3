@@ -3,7 +3,7 @@
     <Sidebar
         @menu-click="handleMenuClick"
     />
-    <Navbar @menu-click="handleMenuClick" />
+    <!-- <Navbar @menu-click="handleMenuClick" /> -->
     <main>
         <slot />
     </main>

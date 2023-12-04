@@ -28,14 +28,11 @@
         </div>
         <div class="forehead">
             <div class="half-width part1">
-                <div class="container login-container">
+                <div class="login-container">
                     <div class="row mb-5">
-                        <img
-                            src="/images/logo2.png"
-                            class="logo"
-                        />
+                        <img src="/images/logo2.png" class="logo" />
                     </div>
-                    <div class="row mb-5">
+                    <div class="row mb-5 form-container">
                         <form @submit.prevent="login">
                             <div class="mb-3">
                                 <label for="" class="form-label">Correo:</label>
@@ -65,7 +62,7 @@
                             <div class="text-end">
                                 <button
                                     type="submit"
-                                    class="btn btn-primary shadow"
+                                    class="btn btn-danger btn-sm shadow"
                                 >
                                     Ingresar
                                     <span
@@ -149,10 +146,13 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
 }
 .logo {
-    width: 200px;
+    width: 150px;
     margin: auto;
 }
 .btn-recomended {
@@ -210,6 +210,9 @@ export default {
     background-position-x: center;
     box-shadow: inset 5px -5px 20px 0px #5c5c5c;
 }
+.form-label {
+    font-weight: 100 !important;
+}
 .spinner-login {
     margin-left: 10px;
 }
@@ -226,6 +229,28 @@ export default {
         padding-bottom: 400px;
         padding-left: 200px;
         padding-right: 200px;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .part1 {
+        width: 100%;
+        background: url(https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2018/01/29121954/Jugos-12.jpg);
+        background-repeat: repeat-x;
+        background-size: cover;
+        background-position-x: center;
+        align-items: center;
+        text-align: center;
+    }
+    .part2 {
+        display: none;
+    }
+    .form-container{
+        width: 300px;
+    }
+    .logo{
+        background-color: #ffffff;
+        border-radius: 50%;
+        padding: 10px;
     }
 }
 </style>

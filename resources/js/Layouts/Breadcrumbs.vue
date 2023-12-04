@@ -1,12 +1,13 @@
 <template>
     <Spinner v-if="isLoading == true"></Spinner>
-    <div class="breadcrumbs text-dark">
-        <a href="dashboard"  @click="handleMenuClick">
+    <div class="breadcrumbs">
+        <a href="dashboard" class="text-white"  @click="handleMenuClick">
             <i class="icon ph-bold ph ph-gauge"></i> &nbsp;Panel</a
         >
 
         <a
             :href="breadcrumb.url"
+            class="text-white"
             v-for="breadcrumb in this.modules"
             @click="handleMenuClick"
             ><span class="separator"> > </span
