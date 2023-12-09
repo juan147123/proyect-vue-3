@@ -154,6 +154,10 @@ export default {
 .logo {
     width: 150px;
     margin: auto;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding: 10px;
+    margin-bottom: -70px;
 }
 .btn-recomended {
     font-family: Open Sans Light, Open Sans, arial;
@@ -216,6 +220,9 @@ export default {
 .spinner-login {
     margin-left: 10px;
 }
+.container-login-app {
+    background-color: rgba(5, 54, 47, 0.925) !important;
+}
 /* Login css mediasquerys  */
 @media screen and (min-width: 2844px) {
     .login-container {
@@ -244,10 +251,10 @@ export default {
     .part2 {
         display: none;
     }
-    .form-container{
+    .form-container {
         width: 300px;
     }
-    .logo{
+    .logo {
         background-color: #ffffff;
         border-radius: 50%;
         padding: 10px;

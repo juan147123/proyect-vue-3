@@ -22,5 +22,9 @@ class TiposRepository extends BaseRepository implements TiposRepositoryInterface
     {
         $this->model = $model;
     }
-   
+
+    public function getTipoByUso($uso)
+    {
+        return $this->model->where('uso', $uso)->get();
+    }
 }

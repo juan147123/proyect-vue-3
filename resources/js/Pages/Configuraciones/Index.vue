@@ -9,7 +9,7 @@
                         type="button"
                         class="btn btn-primary btn-sm my-3"
                         data-bs-toggle="modal"
-                        data-bs-target="#modalUsers"
+                        data-bs-target="#modalConfiguracion"
                     >
                         <i class="ph ph-file-plus"></i>
                         Nuevo
@@ -20,7 +20,7 @@
                         <div class="box-body">
                             <div class="table-responsive">
                                 <table
-                                    id="tableUsers"
+                                    id="tableConfiguracion"
                                     class="table table-bordered dt-responsive"
                                 >
                                     <thead class="active">
@@ -37,12 +37,83 @@
                 </div>
             </div>
         </div>
+        <div
+            class="modal fade"
+            id="modalConfiguracion"
+            tabindex="-1"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            role="dialog"
+            aria-labelledby="modalTitleId"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title" id="modalTitleId">
+                            {{
+                                this.form.id == 0 ? "Registrar" : "Actualizar "
+                            }}
+                            {{ this.modulo }}
+                        </p>
+                        <button
+                            type="button"
+                            class="btn-close btn-sm"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                            id="btn-close-modal-contacts"
+                            @click="clearForm"
+                        ></button>
+                    </div>
+                    <div class="modal-body">
+                        <form @submit.prevent="submit">
+                            <div class="mb-3">
+                                <label for="" class="form-label"
+                                    >Descripción
+                                </label>
+                                <input
+                                    required
+                                    type="text"
+                                    class="form-control"
+                                    v-model="this.form.descripcion"
+                                    aria-describedby="helpId"
+                                    placeholder=""
+                                />
+                            </div>
+                            <div class="modal-footer">
+                                <button
+                                    type="button"
+                                    class="btn btn-danger btn-sm"
+                                    data-bs-dismiss="modal"
+                                    @click="clearForm"
+                                >
+                                    Cancelar
+                                </button>
+                                <button
+                                    type="submit"
+                                    class="btn btn-primary btn-sm"
+                                >
+                                    {{
+                                        this.form.id == 0
+                                            ? "Registrar"
+                                            : "Actualizar "
+                                    }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </AppLayout>
 </template>
 <script>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Breadcrumbs from "@/Layouts/Breadcrumbs.vue";
 import Spinner from "@/Layouts/Preloader.vue";
+import { setSwal } from "../../../Utils/swal";
+import * as mensajes from "../../../Utils/message";
+
 
 export default {
     components: {
@@ -54,24 +125,35 @@ export default {
         return {
             modulos: [
                 {
-                    label: "Usuarios",
+                    label: "",
                     icon: "ph-users",
-                    url: "users",
+                    url: "",
                 },
             ],
             isLoading: false,
             mensaje: false,
             table: "",
+            modulo: "",
             form: this.$inertia.form({
                 id: 0,
-                name: "",
-                email: "",
-                id_rol: "",
-                password: "",
+                descripcion: "",
+                uso: "",
             }),
         };
     },
+    mounted() {
+        this.asingModule();
+        this.createTable();
+    },
     methods: {
+        asingModule() {
+            var rutaActual = window.location.href;
+            var segmentos = rutaActual.split("/");
+            var modulo = segmentos[4];
+            this.modulos[0].label = modulo;
+            this.modulos[0].url = modulo;
+            this.modulo = modulo;
+        },
         submit() {
             if (this.form.id == 0) {
                 this.create();
@@ -81,12 +163,12 @@ export default {
         },
         createTable() {
             var self = this;
-            this.table = new DataTable("#tableProveedores", {
+            this.table = new DataTable("#tableConfiguracion", {
                 language: {
                     url: "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json",
                 },
                 ajax: {
-                    url: "/proveedores/list",
+                    url: "/configuraciones/all/" + this.modulo,
                     dataSrc: "",
                 },
                 responsive: true,
@@ -98,11 +180,6 @@ export default {
                     $("ul.pagination").addClass("pagination-sm");
                 },
                 createdRow: function (row, data, dataIndex) {
-                    $(row)
-                        .find(".contacts-btn")
-                        .on("click", function () {
-                            self.SetContacts(data);
-                        });
                     $(row)
                         .find(".edit-btn")
                         .on("click", function () {
@@ -126,18 +203,9 @@ export default {
                 ],
                 columns: [
                     {
-                        data: "document_type",
+                        data: "descripcion",
                         width: 100,
-                    },
-                    {
-                        data: "document_number",
-                    },
-                    { data: "business_name" },
-                    {
-                        data: "email",
-                    },
-                    {
-                        data: "address",
+                        className: "text-center",
                     },
                     {
                         data: null,
@@ -145,19 +213,7 @@ export default {
                         className: "text-center",
                         render: function (data, type, row) {
                             return (
-                                '<button class="btn btn-primary btn-sm contacts-btn mx-1">' +
-                                '<i class="ph ph-bold ph-user"></i>' +
-                                "</button>"
-                            );
-                        },
-                    },
-                    {
-                        data: null,
-                        width: "100px",
-                        className: "text-center",
-                        render: function (data, type, row) {
-                            return (
-                                '<button class="btn btn-primary btn-sm edit-btn mx-1"  data-bs-toggle="modal" data-bs-target="#modalSuppliers">' +
+                                '<button class="btn btn-primary btn-sm edit-btn mx-1"  data-bs-toggle="modal" data-bs-target="#modalConfiguracion">' +
                                 '<i class="ph ph-bold ph-pen"></i>' +
                                 "</button>" +
                                 '<button class="btn btn-danger btn-sm delete-btn text-white mx-1">' +
@@ -173,9 +229,10 @@ export default {
             this.table.ajax.reload();
         },
         async create() {
+            this.form.uso = this.modulo;
             this.enabledSubmitAnimations(true, "registrando...");
             await axios
-                .post(`proveedores/create`, this.form)
+                .post(`create`, this.form)
                 .then(async (response) => {
                     if (response.status == 200) {
                         this.onSubmitEvent(1);
@@ -187,7 +244,7 @@ export default {
         async update() {
             this.enabledSubmitAnimations(true, "actualizando...");
             await axios
-                .put(`proveedores/update/` + this.form.id, this.form)
+                .put(`update/` + this.form.id, this.form)
                 .then(async (response) => {
                     if (response.status == 200) {
                         this.onSubmitEvent(2);
@@ -209,7 +266,7 @@ export default {
                 if (result.isConfirmed) {
                     this.enabledSubmitAnimations(true, "eliminado...");
                     axios
-                        .put(`proveedores/delete/${id}`)
+                        .put(`delete/${id}`)
                         .then(async (response) => {
                             if (response.status == 200) {
                                 this.onSubmitEvent(3);
@@ -229,12 +286,8 @@ export default {
         },
         clearForm() {
             this.form.id = 0;
-            this.form.supplier_id = 0;
-            this.form.name = "";
-            this.form.document_type = "";
-            this.form.document_number = "";
-            this.form.email = "";
-            this.form.cellphone = "";
+            this.form.uso = "";
+            this.form.descripcion = "";
         },
         enabledSubmitAnimations(status, mensaje) {
             this.isLoading = status;

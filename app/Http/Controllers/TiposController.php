@@ -16,13 +16,13 @@ class TiposController extends Controller
         $this->repository = $repository;
     }
 
-    public function redirectPageTipos($tipo)
+    public function redirectPageTipos()
     {
-        return Inertia::render('Configuraciones/Index', ["tipos" => $tipo]);
+        return Inertia::render('Configuraciones/Index');
     }
-    public function listAll()
+    public function listAll($uso)
     {
-        return $this->repository->all();
+        return $this->repository->getTipoByUso($uso);
     }
     public function create(Request $request)
     {

@@ -63,7 +63,7 @@ Route::middleware([
     
     //TIPOS
     Route::get('configuraciones/{tipo}', [TiposController::class, 'redirectPageTipos'])->name('configuraciones.redirect');
-    Route::get('configuraciones/list/all/{id}', [TiposController::class, 'getAllBySuppId'])->name('configuraciones.list');
+    Route::get('configuraciones/all/{tipo}', [TiposController::class, 'listAll'])->name('configuraciones.list');
     Route::post('configuraciones/create', [TiposController::class, 'create'])->name('configuraciones.create');
     Route::put('configuraciones/update/{id}', [TiposController::class, 'update'])->name('configuraciones.update');
     Route::put('configuraciones/delete/{id}', [TiposController::class, 'delete'])->name('configuraciones.delete');

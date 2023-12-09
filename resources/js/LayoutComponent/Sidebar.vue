@@ -55,7 +55,7 @@
                             class="sub-menu"
                             :class="{
                                 active: route('configuraciones.redirect', [
-                                    'categoria',
+                                    'unidad',
                                 ]),
                             }"
                         >
@@ -63,17 +63,17 @@
                                 @click="handleMenuClick"
                                 :href="
                                     route('configuraciones.redirect', [
-                                        'categoria',
+                                        'unidad',
                                     ])
                                 "
                             >
-                                <span class="text">Categorias</span>
+                                <span class="text">Unidad de medida</span>
                             </a>
                             <a
                                 @click="handleMenuClick"
                                 :href="
                                     route('configuraciones.redirect', [
-                                        'frutas',
+                                        'fruta',
                                     ])
                                 "
                             >
