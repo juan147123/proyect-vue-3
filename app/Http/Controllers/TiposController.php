@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\SupplierRepositoryInterface;
 use App\Interfaces\TiposRepositoryInterface;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -11,8 +12,9 @@ class TiposController extends Controller
 
     private $repository;
 
-    public function __construct(TiposRepositoryInterface $repository)
-    {
+    public function __construct(
+        TiposRepositoryInterface $repository,
+    ) {
         $this->repository = $repository;
     }
 

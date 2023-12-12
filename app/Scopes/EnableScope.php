@@ -18,6 +18,5 @@ class EnableScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
         $builder->where('enable', '=', 1);
-        $builder->orderBy("id", 'desc');
     }
 }

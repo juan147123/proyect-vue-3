@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\{
+    ProductController,
     SupplierContactController,
     UserController,
     SupplierController,
@@ -68,5 +69,12 @@ Route::middleware([
     Route::put('configuraciones/update/{id}', [TiposController::class, 'update'])->name('configuraciones.update');
     Route::put('configuraciones/delete/{id}', [TiposController::class, 'delete'])->name('configuraciones.delete');
 
-
+    //PRODUCTOS
+    Route::get('productos', [ProductController::class, 'redirectPageProducts'])->name('productos.redirect');
+    Route::get('productos/all', [ProductController::class, 'listAll'])->name('productos.list');
+    Route::post('productos/create', [ProductController::class, 'create'])->name('productos.create');
+    Route::put('productos/update/{id}', [ProductController::class, 'update'])->name('productos.update');
+    Route::put('productos/delete/{id}', [ProductController::class, 'delete'])->name('productos.delete');
+    
+    
 });
