@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $enable
  * @property string $created_at
  * @property string $updated_at
+ * @property DetalleVentum[] $detalleVentas
  * @property Inoutproduct[] $inoutproducts
  * @property Supplier $supplier
  * @property Tipo $tipo
@@ -37,6 +38,14 @@ class Product extends Model
      * @var array
      */
     protected $fillable = ['id_supp', 'codigoProd', 'idTipoProducto', 'idTipoUnidadMedida', 'precioCompra', 'porcentaje', 'precioVenta', 'stock', 'estado', 'enable', 'created_at', 'updated_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function detalleVentas()
+    {
+        return $this->hasMany('App\Models\DetalleVenta', 'id_prod', 'id_prod');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

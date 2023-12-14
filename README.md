@@ -1,5 +1,5 @@
 ## necesita
--- php 8
+-- php 8.0
 -- node 16
 
 ## comandos ejecucion
@@ -31,8 +31,12 @@ v16
 ```
 nvm use `cat .nvmrc`
 ```
+
+# Instalacion de estilos boostrap
+
 npm install --save bootstrap
 npm install --save @popperjs/core
+
 # Generar modelo desde la base de datos con Krlove
 
 -   php artisan krlove:generate:model Business --table-name=business --namespace=App\Models --output-path=Models
@@ -50,3 +54,7 @@ npm install --save @popperjs/core
     ],
     ```
 ````
+# Usuario prueba
+
+- pruebadecorreo@gmail.com
+- test1234

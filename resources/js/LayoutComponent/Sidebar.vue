@@ -86,7 +86,31 @@
                     <li>
                         <a>
                             <i class="ph-bold ph-barcode"></i>
-                            <span class="text">Kardex</span>
+                            <span class="text">Productos</span>
+                            <i class="arrow ph-bold ph-caret-down"></i>
+                        </a>
+                        <ul
+                            class="sub-menu"
+                            :class="{
+                                active: route('productos.redirect'),
+                            }"
+                        >
+                            <a
+                                @click="handleMenuClick"
+                                :href="
+                                    route('productos.redirect')
+                                "
+                            >
+                                <span class="text">Almacén</span>
+                            </a>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a>
+                            <i class="ph-bold ph-scales"></i>
+                            <span class="text">Ventas</span>
                             <i class="arrow ph-bold ph-caret-down"></i>
                         </a>
                         <ul

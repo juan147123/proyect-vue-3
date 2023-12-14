@@ -9,7 +9,9 @@ use App\Interfaces\{
     SupplierRepositoryInterface,
     SupplierContactRepositoryInterface,
     TiposRepositoryInterface,
-    ProductRepositoryInterface
+    ProductRepositoryInterface,
+    VentaRepositoryInterface,
+    DetalleVentaRepositoryInterface
 };
 use App\Repositories\{
     BaseRepository,
@@ -17,7 +19,9 @@ use App\Repositories\{
     SupplierRepository,
     SupplierContactRepository,
     TiposRepository,
-    ProductRepository
+    ProductRepository,
+    VentaRepository,
+    DetalleVentaRepository
 };
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -35,6 +39,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SupplierContactRepositoryInterface::class,  SupplierContactRepository::class);
         $this->app->bind(TiposRepositoryInterface::class,  TiposRepository::class);
         $this->app->bind(ProductRepositoryInterface::class,  ProductRepository::class);
+        $this->app->bind(VentaRepositoryInterface::class,  VentaRepository::class);
+        $this->app->bind(DetalleVentaRepositoryInterface::class,  DetalleVentaRepository::class);
     }
 
     /**

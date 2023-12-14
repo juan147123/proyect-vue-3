@@ -5,7 +5,8 @@ use App\Http\Controllers\{
     SupplierContactController,
     UserController,
     SupplierController,
-    TiposController
+    TiposController,
+    VentaController
 };
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -78,3 +79,9 @@ Route::middleware([
     
     
 });
+//VENTAS
+Route::get('ventas', [VentaController::class, 'redirectPageProducts'])->name('ventas.redirect');
+Route::get('ventas/all', [VentaController::class, 'listAll'])->name('ventas.list');
+Route::post('ventas/create', [VentaController::class, 'create'])->name('ventas.create');
+Route::put('ventas/update/{id}', [VentaController::class, 'update'])->name('ventas.update');
+Route::put('ventas/delete/{id}', [VentaController::class, 'delete'])->name('ventas.delete');
