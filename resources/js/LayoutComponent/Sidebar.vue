@@ -116,16 +116,16 @@
                         <ul
                             class="sub-menu"
                             :class="{
-                                active: route('productos.redirect'),
+                                active: route('ventas.redirect'),
                             }"
                         >
                             <a
                                 @click="handleMenuClick"
                                 :href="
-                                    route('productos.redirect')
+                                    route('ventas.redirect')
                                 "
                             >
-                                <span class="text">Almacén</span>
+                                <span class="text">ventas</span>
                             </a>
                         </ul>
                     </li>

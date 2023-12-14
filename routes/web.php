@@ -80,7 +80,7 @@ Route::middleware([
     
 });
 //VENTAS
-Route::get('ventas', [VentaController::class, 'redirectPageProducts'])->name('ventas.redirect');
+Route::get('ventas', [VentaController::class, 'redirectPageVentas'])->name('ventas.redirect');
 Route::get('ventas/all', [VentaController::class, 'listAll'])->name('ventas.list');
 Route::post('ventas/create', [VentaController::class, 'create'])->name('ventas.create');
 Route::put('ventas/update/{id}', [VentaController::class, 'update'])->name('ventas.update');

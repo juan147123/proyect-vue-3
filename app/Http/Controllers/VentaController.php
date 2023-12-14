@@ -16,9 +16,9 @@ class VentaController extends Controller
         $this->repository = $repository;
     }
 
-    public function redirectPageTipos()
+    public function redirectPageVentas()
     {
-        return Inertia::render('Configuraciones/Index');
+        return Inertia::render('Ventas/Index');
     }
 
     public function listAll()
