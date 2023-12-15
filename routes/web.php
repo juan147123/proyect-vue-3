@@ -78,10 +78,10 @@ Route::middleware([
     Route::put('productos/delete/{id}', [ProductController::class, 'delete'])->name('productos.delete');
     
     
+    //VENTAS
+    Route::get('ventas', [VentaController::class, 'redirectPageVentas'])->name('ventas.redirect');
+    Route::get('ventas/all', [VentaController::class, 'listAll'])->name('ventas.list');
+    Route::post('ventas/create', [VentaController::class, 'create'])->name('ventas.create');
+    Route::put('ventas/update/{id}', [VentaController::class, 'update'])->name('ventas.update');
+    Route::put('ventas/delete/{id}', [VentaController::class, 'delete'])->name('ventas.delete');
 });
-//VENTAS
-Route::get('ventas', [VentaController::class, 'redirectPageVentas'])->name('ventas.redirect');
-Route::get('ventas/all', [VentaController::class, 'listAll'])->name('ventas.list');
-Route::post('ventas/create', [VentaController::class, 'create'])->name('ventas.create');
-Route::put('ventas/update/{id}', [VentaController::class, 'update'])->name('ventas.update');
-Route::put('ventas/delete/{id}', [VentaController::class, 'delete'])->name('ventas.delete');
