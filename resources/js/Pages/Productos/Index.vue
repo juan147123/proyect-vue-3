@@ -299,7 +299,7 @@ export default {
                     $(row)
                         .find(".delete-btn")
                         .on("click", function () {
-                            self.delete(data.id);
+                            self.delete(data.id_prod);
                         });
                 },
                 ordering: false,
