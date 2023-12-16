@@ -10,6 +10,7 @@
                         class="btn btn-primary btn-sm my-3"
                         data-bs-toggle="modal"
                         data-bs-target="#modalVenta"
+                        @click="disabledIsedit"
                     >
                         <i class="ph ph-file-plus"></i>
                         Nuevo
@@ -34,6 +35,7 @@
                                             <th>Tipo de comprobante</th>
                                             <th>Total de venta</th>
                                             <th>Detalle</th>
+                                            <th>Comprobante</th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -300,7 +302,11 @@
                                 >
                                     Cancelar
                                 </button>
-                                <button type="Submit" class="btn btn-primary" v-if="isEdit == false">
+                                <button
+                                    type="Submit"
+                                    class="btn btn-primary"
+                                    v-if="isEdit == false"
+                                >
                                     Vender
                                 </button>
                             </div>
@@ -351,6 +357,57 @@ export default {
         this.listProducts();
     },
     methods: {
+        setData(data) {
+            this.productosDetalle = [];
+            var documentoCliente = $("#tipo_documento_cliente");
+            var numeroDocumentoCliente = $("#documento_cliente");
+            var nombreCliente = $("#nombre_cliente");
+            var tipoCompro = $("#tipo_compro");
+
+            documentoCliente.val(data.tipo_documento_cliente);
+            nombreCliente.val(data.nombre_cliente);
+            numeroDocumentoCliente.val(data.documento_cliente);
+            tipoCompro.val(data.tipo_compro);
+
+            documentoCliente.prop("disabled", true);
+            numeroDocumentoCliente.prop("disabled", true);
+            nombreCliente.prop("disabled", true);
+            tipoCompro.prop("disabled", true);
+
+            var detalleVenta = data.detalle_ventas;
+            detalleVenta.forEach((detalle) => {
+                console.log(detalle);
+
+                var nuevoProdDetalle = {
+                    id_prod: detalle.id_prod,
+                    descripcion:
+                        detalle.product.codigoProd +
+                        "-" +
+                        detalle.product.products_tipo.descripcion,
+                    cantidad: detalle.cantidad,
+                    precio: detalle.product.precioVenta,
+                };
+                this.productosDetalle.push(nuevoProdDetalle);
+                this.calcularSuma();
+            });
+        },
+        disabledIsedit() {
+            this.isEdit = false;
+            var documentoCliente = $("#tipo_documento_cliente");
+            var numeroDocumentoCliente = $("#documento_cliente");
+            var nombreCliente = $("#nombre_cliente");
+            var tipoCompro = $("#tipo_compro");
+            documentoCliente.prop("disabled", false);
+            numeroDocumentoCliente.prop("disabled", false);
+            nombreCliente.prop("disabled", false);
+            tipoCompro.prop("disabled", false);
+            documentoCliente.val("");
+            numeroDocumentoCliente.val("");
+            nombreCliente.val("");
+            tipoCompro.val("");
+            this.productosDetalle = [];
+            this.calcularSuma();
+        },
         submit() {
             var data = {
                 tipo_documento_cliente: $("#tipo_documento_cliente").val(),
@@ -469,6 +526,7 @@ export default {
                         .find(".edit-btn")
                         .on("click", function () {
                             self.isEdit = true;
+                            self.setData(data);
                         });
                 },
                 ordering: false,
@@ -500,9 +558,26 @@ export default {
                         render: function (data, type, row) {
                             return (
                                 '<div class="text-center">' +
-                                '<button class="btn btn-primary btn-sm edit-btn mx-1"  data-bs-toggle="modal" data-bs-target="#modalVenta">' +
-                                '<i class="ph ph-bold ph-file"></i>' +
+                                '<button class="btn btn-info btn-sm edit-btn mx-1"  data-bs-toggle="modal" data-bs-target="#modalVenta">' +
+                                '<i class="ph ph-bold ph-clipboard-text"></i>' +
                                 "</button>" +
+                                "</div>"
+                            );
+                        },
+                    },
+                    {
+                        data: "enlaceComprobante",
+                        width: "100px",
+                        addClass: "text-center",
+                        render: function (data, type, row) {
+                            return (
+                                '<div class="text-center">' +
+                                '<a class="btn btn-primary btn-sm  mx-1" target="_blank" href ="' +
+                                data +
+                                '">' +
+                                '<i class="ph ph-bold ph-file m-1"></i>' +
+                                row.tipo_compro +
+                                "</a>" +
                                 "</div>"
                             );
                         },

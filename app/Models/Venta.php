@@ -37,7 +37,7 @@ class Venta extends Model
     /**
      * @var array
      */
-    protected $fillable = ['codigo', 'tipo_documento_cliente', 'documento_cliente', 'nombre_cliente', 'responsable', 'fecha_registro', 'tipo_compro', 'enable', 'created_at', 'updated_at','total_venta'];
+    protected $fillable = ['codigo', 'tipo_documento_cliente', 'documento_cliente', 'nombre_cliente', 'responsable', 'fecha_registro', 'tipo_compro', 'enable', 'created_at', 'updated_at','total_venta','enlaceComprobante'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

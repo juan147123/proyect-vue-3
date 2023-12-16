@@ -85,3 +85,4 @@ Route::middleware([
     Route::put('ventas/update/{id}', [VentaController::class, 'update'])->name('ventas.update');
     Route::put('ventas/delete/{id}', [VentaController::class, 'delete'])->name('ventas.delete');
 });
+Route::get('factura', [VentaController::class, 'ejecutarfacturacion'])->name('ventas.factura');
